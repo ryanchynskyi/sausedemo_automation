@@ -21,6 +21,9 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. Set via BASE_URL in .env */
     baseURL: env.baseUrl,
 
+    /* saucedemo marks elements with data-test="..." */
+    testIdAttribute: 'data-test',
+
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',

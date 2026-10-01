@@ -1,18 +1,38 @@
 import { test as base } from '@playwright/test';
-import { HomePage } from '../pages/HomePage';
-import { DocsPage } from '../pages/DocsPage';
+import { LoginPage } from '../pages/LoginPage';
+import { InventoryPage } from '../pages/InventoryPage';
+import { CartPage } from '../pages/CartPage';
+import { CheckoutInfoPage } from '../pages/CheckoutInfoPage';
+import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
+import { CheckoutCompletePage } from '../pages/CheckoutCompletePage';
 
 type Pages = {
-  homePage: HomePage;
-  docsPage: DocsPage;
+  loginPage: LoginPage;
+  inventoryPage: InventoryPage;
+  cartPage: CartPage;
+  checkoutInfoPage: CheckoutInfoPage;
+  checkoutOverviewPage: CheckoutOverviewPage;
+  checkoutCompletePage: CheckoutCompletePage;
 };
 
 export const test = base.extend<Pages>({
-  homePage: async ({ page }, use) => {
-    await use(new HomePage(page));
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
   },
-  docsPage: async ({ page }, use) => {
-    await use(new DocsPage(page));
+  inventoryPage: async ({ page }, use) => {
+    await use(new InventoryPage(page));
+  },
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
+  },
+  checkoutInfoPage: async ({ page }, use) => {
+    await use(new CheckoutInfoPage(page));
+  },
+  checkoutOverviewPage: async ({ page }, use) => {
+    await use(new CheckoutOverviewPage(page));
+  },
+  checkoutCompletePage: async ({ page }, use) => {
+    await use(new CheckoutCompletePage(page));
   },
 });
 
