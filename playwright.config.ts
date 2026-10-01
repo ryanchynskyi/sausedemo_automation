@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import { env } from './src/config/env';
+import { env, AUTH_FILE } from './src/config/env';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -32,19 +32,28 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    /* Logs in once and saves the session to AUTH_FILE; browser projects below reuse it */
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
+    },
+
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'], storageState: AUTH_FILE },
+      dependencies: ['setup'],
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: { ...devices['Desktop Firefox'], storageState: AUTH_FILE },
+      dependencies: ['setup'],
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: { ...devices['Desktop Safari'], storageState: AUTH_FILE },
+      dependencies: ['setup'],
     },
 
     /* Test against mobile viewports. */

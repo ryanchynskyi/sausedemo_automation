@@ -1,13 +1,12 @@
 import { test, expect } from '../../src/fixtures';
-import { env } from '../../src/config/env';
 import { createUser } from '../../src/utils/dataFactory';
 
 const products = ['Sauce Labs Backpack', 'Sauce Labs Bike Light'];
 
 test.describe('Checkout', () => {
-  test.beforeEach(async ({ loginPage, inventoryPage }) => {
-    await loginPage.open();
-    await loginPage.login(env.userEmail, env.userPassword);
+  // Already logged in via storageState (see tests/auth.setup.ts)
+  test.beforeEach(async ({ inventoryPage }) => {
+    await inventoryPage.open();
     await inventoryPage.expectOpened();
   });
 

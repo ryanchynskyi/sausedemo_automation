@@ -2,6 +2,9 @@ import { test, expect } from '../../src/fixtures';
 import { env } from '../../src/config/env';
 
 test.describe('Login', () => {
+  // These tests check the login form itself, so start without the saved session
+  test.use({ storageState: { cookies: [], origins: [] } });
+
   test.beforeEach(async ({ loginPage }) => {
     await loginPage.open();
   });
